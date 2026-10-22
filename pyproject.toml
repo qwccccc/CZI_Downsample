@@ -1,0 +1,21 @@
+[project]
+name = "multi-test"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "aicspylibczi>=4.0.1",
+    "numpy>=2.0,<3",
+    "pylibCZIrw>=6.1,<7",
+    "scipy>=1.16,<2",
+]
+
+[project.optional-dependencies]
+benchmark = [
+    "bioio-czi>=3.0.1",
+    "czifile>=2026.10.14",
+]
+gpu = [
+    "cupy-cuda12x[ctk]>=14.2.0",
+]
