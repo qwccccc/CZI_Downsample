@@ -33,9 +33,9 @@ input_dir,output_dir
 
 ```bash
 JOBS_CSV="$SCRIPT_DIR/jobs.csv"  # 改成自己的 CSV 路径
-WORKERS=4
+WORKERS=8
 DEVICES=(0 1)
-BATCH_ROWS=256
+BATCH_ROWS=4096
 TARGET_UM=10
 ```
 
@@ -45,12 +45,12 @@ TARGET_UM=10
 bash /home/chaiqw/project/multi-test/Script/czi_ds/run_gpu_table.sh
 ```
 
-- `--workers 4`：最多同时处理 4 个 CZI 文件。
+- `--workers 8`：最多同时处理 4 个 CZI 文件。
 - `--devices 0 1`：使用两张 GPU，多个 worker 可以共用一张 GPU。
-- `--batch-rows 256`：每批计算的输出行数，不影响最终分辨率。
+- `--batch-rows 4096`：每批计算的输出行数，不影响最终分辨率。
 - `--target-um 10`：输出 XY 像素尺寸为 10 µm/pixel。
 
-默认使用 4 个 worker、每批 256 行、10 µm/pixel，使用 GPU 0 和 1。
+默认使用 8 个 worker、每批 4096 行、10 µm/pixel，使用 GPU 0 和 1。
 只有一张 GPU 时设置 `DEVICES=(0)`；自动选卡设置 `DEVICES=()`。
 任务表默认位置为脚本旁的 `jobs.csv`，可复制任务表示例后填写，
 或将 `JOBS_CSV` 改成现有任务表的绝对路径。
