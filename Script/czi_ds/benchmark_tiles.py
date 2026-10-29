@@ -24,8 +24,9 @@ def full_plane_tile(source, target):
         if target < max(scales["X"], scales["Y"]):
             raise ValueError("Target must not upsample either XY axis")
         scenes = reader.scenes_bounding_rectangle or {None: reader.total_bounding_rectangle}
-        return max(max(math.ceil(rect.w * scales["X"] / target),
-                       math.ceil(rect.h * scales["Y"] / target))
+        ratios = target / scales["X"], target / scales["Y"]
+        return max(max(math.ceil(rect.w / ratios[0]),
+                       math.ceil(rect.h / ratios[1]))
                    for rect in scenes.values())
 
 

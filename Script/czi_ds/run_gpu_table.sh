@@ -5,9 +5,9 @@ PROJECT_ROOT="$(cd -- "$SCRIPT_DIR/../.." && pwd)"
 
 # 在这里修改运行参数。任务表默认使用脚本旁的 jobs.csv，请先创建并填写。
 JOBS_CSV="$SCRIPT_DIR/jobs.csv"
-WORKERS=8
+WORKERS=4
 DEVICES=(0 1)  # 留空写成 ()，自动使用所有可见 GPU。
-BATCH_ROWS=4096
+BATCH_ROWS=256
 TARGET_UM=10
 
 PYTHON="$PROJECT_ROOT/.venv/bin/python"
@@ -27,3 +27,4 @@ if (( ${#DEVICES[@]} > 0 )); then
     ARGS+=(--devices "${DEVICES[@]}")
 fi
 exec "$PYTHON" -u "$SCRIPT_DIR/batch_czi_gpu.py" "${ARGS[@]}" "$@"
+                                                                                            

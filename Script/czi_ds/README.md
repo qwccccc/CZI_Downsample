@@ -36,6 +36,9 @@ bash Script/czi_ds/run_gpu_table.sh
 运行前修改 `run_gpu_table.sh` 顶部的 `JOBS_CSV`、`WORKERS`、
 `DEVICES`、`BATCH_ROWS` 和 `TARGET_UM`。任务表默认是脚本旁的 `jobs.csv`，
 需要自行创建填写；`DEVICES=()` 表示自动选卡。命令行参数仍可覆盖脚本配置。
+脚本默认使用 4 个 worker 和 256 行 GPU batch，降低多进程共享显卡时的显存压力；
+这不是显存用量保证，大图或其他 GPU 任务仍可能需要进一步降低并发或 batch 行数。
+重新提交会校验并跳过已完成通道，未完成通道会重新生成，无需先删除已有结果。
 脚本自动使用 nohup，立即返回终端。每个输出目录的 logs 保存对应文件日志；
 任务表第一个输出目录的 logs 保存按时间命名的整批日志、报告和 PID。
 提交后按终端显示的日志路径使用 `tail -f` 查看。日志不会默认写入代码目录。

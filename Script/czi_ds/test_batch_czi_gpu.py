@@ -12,9 +12,25 @@ from pylibCZIrw import czi
 from batch_czi_gpu import load_jobs, run_worker
 from batch_czi_gpu import main
 from process_czi import process
+from benchmark_tiles import full_plane_tile
+from benchmark_gpu import BatchedAreaMean
 
 
 class TableResumeTests(unittest.TestCase):
+    def test_full_plane_tile_matches_processor_rounding(self):
+        reader = Mock()
+        rect = Mock(x=0, y=0, w=29600, h=20416)
+        reader.scenes_bounding_rectangle = {0: rect}
+        with patch("benchmark_tiles.czi.open_czi") as open_czi, \
+             patch("benchmark_tiles.metadata", return_value=({"X": 0.65, "Y": 0.65}, {})):
+            open_czi.return_value.__enter__.return_value = reader
+            tile = full_plane_tile(Path("source.czi"), 10.0)
+        self.assertEqual(tile, 1925)
+        reader.read.side_effect = RuntimeError("whole-plane bounds accepted")
+        with self.assertRaisesRegex(RuntimeError, "whole-plane bounds accepted"):
+            BatchedAreaMean()(reader, {"C": 0}, 0, rect, (0, 0, tile, 1328),
+                              (10.0 / 0.65, 10.0 / 0.65), {"read": 0.0})
+
     def test_submit_places_logs_in_first_output_without_starting_real_job(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

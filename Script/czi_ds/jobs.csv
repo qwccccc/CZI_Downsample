@@ -1,2 +1,6 @@
 input_dir,output_dir
-/mnt/99-raw-data9-2/C100,/mnt/93-zeiss3/20231222-low-resolution/C100-downSample
+/mnt/98-raw-data8-1/C015/C015-compressed,/mnt/93-zeiss3/20231222-low-resolution/C015-downSample
+/mnt/98-raw-data8-2/C025/C025-compressed,/mnt/93-zeiss3/20231222-low-resolution/C025-downSample
+/mnt/98-raw-data8-2/C028/C028-compressed,/mnt/93-zeiss3/20231222-low-resolution/C028-downSample
+/mnt/98-raw-data8-2/C030/C030-compressed,/mnt/93-zeiss3/20231222-low-resolution/C030-downSample
+/mnt/98-raw-data8-2/C031/C031-compressed,/mnt/93-zeiss3/20231222-low-resolution/C031-downSample

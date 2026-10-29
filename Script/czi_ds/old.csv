@@ -1,0 +1,3 @@
+input_dir,output_dir
+/mnt/93-zeiss3/rawData/C114/C114-compressed,/mnt/93-zeiss3/20231222-low-resolution/C114-downSample
+/mnt/93-zeiss3/rawData/C109/C109-compressed,/mnt/93-zeiss3/20231222-low-resolution/C109-downSample
